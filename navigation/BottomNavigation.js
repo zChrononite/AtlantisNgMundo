@@ -1,6 +1,7 @@
-import { COLORS } from '../components/theme';
+import { COLORS, FONTS } from '../components/theme';
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { Entypo, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
 
 
 import HomeMainPage from '../screens/HomeMainPage';
@@ -29,15 +30,32 @@ const BottomNavigation = () => {
     <View style={{ flex: 1 }}>
       {renderScreen()}
       <View style={styles.bottomNavigator}>
-        <TouchableOpacity onPress={() => setActiveScreen('HomeMainPage')}>
-          <Text style={{ color: activeScreen === 'HomeMainPage' ? COLORS.primary : COLORS.black }}>Dashboard</Text>
+        {/* Home */}
+        <TouchableOpacity onPress={() => setActiveScreen('HomeMainPage')} style={{alignItems: 'center', justifyContent: 'center', }}>
+            {activeScreen  === 'HomeMainPage' ?( <Entypo name='home' size={24} color={COLORS.primary}/>
+            ) : ( <AntDesign name='home' size={24} color={COLORS.gray70}/>)
+            }    
+            <Text style={{ color: activeScreen === 'HomeMainPage' ? COLORS.primary : COLORS.black , ...FONTS.h2}}>Dashboard</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setActiveScreen('ActuatorsMainPage')}>
-          <Text style={{ color: activeScreen === 'ActuatorsMainPage' ? COLORS.primary : COLORS.black }}>Actuators</Text>
+
+        {/* Actautors */}
+        <TouchableOpacity onPress={() => setActiveScreen('ActuatorsMainPage')} style={{alignItems: 'center', justifyContent: 'center', }}>
+
+            {activeScreen  === 'ActuatorsMainPage' ? ( <MaterialCommunityIcons name='pipe-valve' size={24} color={COLORS.primary}/>
+            ) : ( <MaterialCommunityIcons name='pipe-valve' size={24} color={COLORS.gray70}/>)
+            }
+            <Text style={{ color: activeScreen === 'ActuatorsMainPage' ? COLORS.primary : COLORS.black }}>Actuators</Text>
+
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setActiveScreen('SensorsMainPage')}>
-          
-          <Text style={{ color: activeScreen === 'SensorsMainPage' ? COLORS.primary : COLORS.black }}>Actuators</Text>
+
+        {/* Sensors */}
+        <TouchableOpacity onPress={() => setActiveScreen('SensorsMainPage')} style={{alignItems: 'center', justifyContent: 'center', }}>
+
+            {activeScreen  === 'SensorsMainPage' ? ( <MaterialCommunityIcons name='bullseye' size={24} color={COLORS.primary}/>
+            ) : ( <MaterialCommunityIcons name='bullseye' size={24} color={COLORS.gray70}/>)
+            }
+            <Text style={{ color: activeScreen === 'SensorsMainPage' ? COLORS.primary : COLORS.black, }}>Sensors</Text>
+
         </TouchableOpacity>
       </View>
     </View>
@@ -49,12 +67,13 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center',
-      height: 50,
+      height: 80,
       position: 'absolute',
       bottom: 0,
       left: 0,
       right: 0,
-      backgroundColor: 'white'
+      backgroundColor: 'white',
+      borderTopWidth: 1,
     }
   });
 
