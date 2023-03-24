@@ -1,12 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { useState,useEffect } from 'react';
+
+import LoadingScreen from './screens/LoadingScreen';
+import HomeMainPage from './screens/HomeMainPage';
+import BottomNavigation from './navigation/BottomNavigation';
+
 
 export default function App() {
+
+    const [isLoading, setIsLoading] = useState(true);
+
+      useEffect(() => {
+        // Simulate a delay of 2 seconds before setting the loading status to false
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 3000);
+      }, []);
+
+      if (isLoading) {
+        return <LoadingScreen />;
+      }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+     <BottomNavigation/>
+    </>
+
   );
 }
 
@@ -18,3 +38,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
