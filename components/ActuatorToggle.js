@@ -99,16 +99,16 @@ const PowerButton = ({status}) => {
     
     
     return (
-        <>
-        <TouchableOpacity onPress={togglePower} style={styles.circleButton }>
-            <MaterialCommunityIcons
-            name={isOn ? 'power' : 'power'}
-            size={200}
-            style={styles.pwrBtn}
-            color={isOn ? COLORS.primary3:COLORS.secondary}
-            
-            />
-        </TouchableOpacity> 
+    <>
+    <TouchableOpacity onPress={togglePower} style={styles.circleButton }>
+        <MaterialCommunityIcons
+        name={isOn ? 'power' : 'power'}
+        size={200}
+        style={styles.pwrBtn}
+        color={isOn ? COLORS.primary3:COLORS.secondary}
+        
+        />
+    </TouchableOpacity> 
     {/* this is the timer for the countdown */}
       <Modal visible={showModal} animationType="fade" transparent>
         <View style={styles.modal}>
@@ -224,7 +224,7 @@ const PowerButton = ({status}) => {
               </TouchableOpacity>
         </View>
       </Modal>
-        </>
+   </>
     )
 }
 

@@ -1,10 +1,22 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
+import SpecificSensorPage from './SpecificSensorPage';
 
 const SensorsMainPage = () => {
+
+  const [showNextPage, setShowNextPage] = useState(false);
+
+
   return (
-    <View>
-      <Text>SensorsMainPage</Text>
+    <View stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false}>
+      { !showNextPage && 
+        <View>
+          <MainPageHeader title='Sensors'/>
+        </View>
+      }
+      {
+        showNextPage && <SpecificSensorPage />
+      }
     </View>
   )
 }
