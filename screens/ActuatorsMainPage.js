@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity, Animated, ScrollView  } from 'react-native'
-import { useState, useEffect, useRef, React } from 'react'
+import { useState, useEffect, useRef, React, useMemo } from 'react'
 import { SIZES, COLORS, FONTS } from '../components/theme'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 

@@ -18,8 +18,6 @@ const sensorType = (name) => {
   return sensorTypes[name] || null;
 };
 
-
-
 const SpecificSensorPage = (props) => {
 
   const name = props.params['name'];
@@ -33,6 +31,15 @@ const SpecificSensorPage = (props) => {
   };
 
 
+  useEffect(() => {
+    fetch('https://atlantis-api-gk7h.onrender.com/api/v1.0/AmbientParams')
+      .then(response => response.json())
+      .then(data => {
+        setReadings(data);
+        setLoading(false);
+      })
+      .catch(error => console.error(error))
+  }, [])
 
   return (
     <>
