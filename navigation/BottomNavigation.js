@@ -1,4 +1,4 @@
-import { COLORS, FONTS } from '../components/theme';
+import { COLORS, FONTS, SIZES } from '../components/theme';
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Entypo, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
@@ -35,7 +35,7 @@ const BottomNavigation = () => {
             {activeScreen  === 'HomeMainPage' ?( <Entypo name='home' size={24} color={COLORS.primary}/>
             ) : ( <AntDesign name='home' size={24} color={COLORS.gray70}/>)
             }    
-            <Text style={{ color: activeScreen === 'HomeMainPage' ? COLORS.primary : COLORS.black , ...FONTS.h2}}>Dashboard</Text>
+            <Text style={{ color: activeScreen === 'HomeMainPage' ? COLORS.primary : COLORS.black , ...FONTS.h3}}>DASHBOARD</Text>
         </TouchableOpacity>
 
         {/* Actautors */}
@@ -44,7 +44,7 @@ const BottomNavigation = () => {
             {activeScreen  === 'ActuatorsMainPage' ? ( <MaterialCommunityIcons name='pipe-valve' size={24} color={COLORS.primary}/>
             ) : ( <MaterialCommunityIcons name='pipe-valve' size={24} color={COLORS.gray70}/>)
             }
-            <Text style={{ color: activeScreen === 'ActuatorsMainPage' ? COLORS.primary : COLORS.black }}>Actuators</Text>
+            <Text style={{ color: activeScreen === 'ActuatorsMainPage' ? COLORS.primary : COLORS.black, ...FONTS.h3}}>ACTUATORS</Text>
 
         </TouchableOpacity>
 
@@ -54,7 +54,7 @@ const BottomNavigation = () => {
             {activeScreen  === 'SensorsMainPage' ? ( <MaterialCommunityIcons name='bullseye' size={24} color={COLORS.primary}/>
             ) : ( <MaterialCommunityIcons name='bullseye' size={24} color={COLORS.gray70}/>)
             }
-            <Text style={{ color: activeScreen === 'SensorsMainPage' ? COLORS.primary : COLORS.black, }}>Sensors</Text>
+            <Text style={{ color: activeScreen === 'SensorsMainPage' ? COLORS.primary : COLORS.black, ...FONTS.h3 }}>SENSORS</Text>
 
         </TouchableOpacity>
       </View>
@@ -67,13 +67,16 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center',
-      height: 80,
+      height: (SIZES.height*0.10),
       position: 'absolute',
       bottom: 0,
       left: 0,
       right: 0,
       backgroundColor: 'white',
-      borderTopWidth: 1,
+      borderTopWidth: 0.8,
+      borderColor: COLORS.gray30,
+      padding: 5,
+      marginTop: 5,
     }
   });
 

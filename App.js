@@ -1,30 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { useState,useEffect } from 'react';
-
-import LoadingScreen from './screens/LoadingScreen';
-import HomeMainPage from './screens/HomeMainPage';
 import BottomNavigation from './navigation/BottomNavigation';
+import { useFonts } from 'expo-font';
+import HomeMainPage from './screens/HomeMainPage';
 
 
 export default function App() {
 
-    const [isLoading, setIsLoading] = useState(true);
+  const [loaded] = useFonts({
+    'Roboto-Bold': require('./assets/fonts/RobotoMono-Bold.ttf'),
+    'Roboto-Regular': require('./assets/fonts/RobotoMono-Regular.ttf'),
+  })
 
-      useEffect(() => {
-        // Simulate a delay of 2 seconds before setting the loading status to false
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 3000);
-      }, []);
+  if(!loaded) {
+   return null
+  }
 
-      if (isLoading) {
-        return <LoadingScreen />;
-      }
+  
 
   return (
     <>
-     <BottomNavigation/>
+     <BottomNavigation />
     </>
 
   );
