@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import SpecificSensorPage from './SpecificSensorPage';
+import { useState } from 'react';
+import MainPageHeader from './constants/MainPageHeader';
 
 const SensorsMainPage = () => {
 

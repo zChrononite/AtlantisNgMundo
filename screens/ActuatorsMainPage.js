@@ -49,7 +49,7 @@ const ActuatorsMainPage = ({}) => {
   }, [opacity]);
 
   return (
-    <View stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false}>
+    <View stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false} style={{backgroundColor: '#fff'}}>
       
       {/* Code inside the !showNextPage */}
       {!showNextPage && 
@@ -117,7 +117,7 @@ const ActuatorsMainPage = ({}) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    height: (SIZES.height * 0.80)
+    height: (SIZES.height * 0.82)
   },
 
   card: {
