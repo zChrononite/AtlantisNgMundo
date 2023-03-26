@@ -41,6 +41,7 @@ const SpecificActuatorPage = (props) => {
   const name = props.data['name'];
   const status = props.data['status'];
   const icon = props.data['icon'];
+  
   const { data, loading } = ActuatorDataFetch();
 
 
