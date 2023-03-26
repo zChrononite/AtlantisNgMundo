@@ -66,10 +66,10 @@ const PowerButton = ({status}) => {
             setPinNumber('');
             setActiveIndicators([false, false, false, false]);
             if (isOn) {
-                setIsOn(!status)
+                setIsOn(false)
               }
               else{
-                setIsOn(status)
+                setIsOn(true)
               }
             break;
           default:
@@ -162,26 +162,26 @@ const PowerButton = ({status}) => {
               <TouchableOpacity style={styles.pinNumber} onPress={() => handleButtonPress('4')}>
                 <Text>4</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.pinNumber}>
+              <TouchableOpacity style={styles.pinNumber } onPress={() => handleButtonPress('5')}>
                 <Text>5</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.pinNumber}>
+              <TouchableOpacity style={styles.pinNumber} onPress={() => handleButtonPress('6')}>
                 <Text>6</Text>
               </TouchableOpacity>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <TouchableOpacity style={styles.pinNumber}>
+              <TouchableOpacity style={styles.pinNumber} onPress={() => handleButtonPress('7')}>
                 <Text>7</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.pinNumber}>
+              <TouchableOpacity style={styles.pinNumber} onPress={() => handleButtonPress('8')}>
                 <Text>8</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.pinNumber}>
+              <TouchableOpacity style={styles.pinNumber} onPress={() => handleButtonPress('9')}>
                 <Text>9</Text>
               </TouchableOpacity>
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-              <TouchableOpacity style={styles.pinNumber}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }} >
+              <TouchableOpacity style={styles.pinNumber} onPress={() => handleButtonPress('0')}>
                 <Text>0</Text>
               </TouchableOpacity>
             </View>

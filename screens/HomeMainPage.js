@@ -13,9 +13,13 @@ const HomeMainPage = () => {
       
       {/* Code inside the !showNextPage */}
       {showPage && 
-        <View style={styles.container}>
+      <View>
           <MainPageHeader title='DASHBOARD'/>
-          <Text>Hello</Text>
+        <View style={styles.container}>
+          
+          <Text>Selected Edge Device</Text>
+          <Text>Edge Device ID: ATM6</Text>
+        </View>
         </View>
       }
 
@@ -26,7 +30,10 @@ const HomeMainPage = () => {
 const styles = StyleSheet.create({
     container: {
       backgroundColor: '#fff',
-      height: (SIZES.height * 0.80)
+      height: (SIZES.height * 0.78),
+      width: SIZES.width,
+      alignItems: 'center',
+      justifyContent: 'center'
     },
 
 });
