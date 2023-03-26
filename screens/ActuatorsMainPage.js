@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity, Animated, ScrollView  } from 'react-native'
-import React, {  useState, useEffect, useRef } from 'react'
+import React, {  useState, useEffect, useRef, useMemo } from 'react'
 import { SIZES, COLORS, FONTS } from '../components/theme'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
@@ -30,23 +30,26 @@ const ActuatorsMainPage = ({}) => {
 
   const opacity = useRef(new Animated.Value(1)).current;
 
-  useEffect(() => 
-  {
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(opacity, {
-          toValue: 0,
-          duration: 500,
-          useNativeDriver: false,
-        }),
-        Animated.timing(opacity, {
-          toValue: 1,
-          duration: 500,
-          useNativeDriver: false,
-        }),
-      ]),
-    ).start();
-  }, [opacity]);
+  const animation = useMemo(() =>
+  Animated.sequence([
+    Animated.timing(opacity, {
+      toValue: 0,
+      duration: 500,
+      useNativeDriver: true,
+    }),
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }),
+  ]),
+  []
+);
+
+useEffect(() => {
+  Animated.loop(animation).start();
+}, [animation]);
+
 
   return (
     <View stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false} style={{backgroundColor: '#fff'}}>
