@@ -3,7 +3,7 @@ import SpecificSensorPage from './SpecificSensorPage';
 import {  useState, useEffect, useRef, React } from 'react'
 
 import MainPageHeader from './constants/MainPageHeader';
-import CurrentAmbientParamsSensorsDataFetch from '../data/CurrentAmbientParamsSensorsDataFetch';
+import CurrentSensorsStatusData from '../data/CurrentSensorsStatusData';
 import { SIZES } from '../components/theme';
 
 import SensorCardContent from '../components/SensorCardContent';
@@ -12,26 +12,33 @@ const SensorsMainPage = () => {
 
   const [showNextPage, setShowNextPage] = useState(false);
 
-  const ambientSensors = CurrentAmbientParamsSensorsDataFetch();
+  const ambientSensors = CurrentSensorsStatusData('AmbientParams');
+  const wTestBed = CurrentSensorsStatusData('WTestBed');
+  const wBioFilter = CurrentSensorsStatusData('WBiofilter');
+  const wSensingTank = CurrentSensorsStatusData('WSensingTank');
+  const fishData = CurrentSensorsStatusData('FishData');
+  const plantData = CurrentSensorsStatusData('PlantData');
 
 
 
   return (
     <View stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false}>
-      { !showNextPage && 
+    
         <View>
           <MainPageHeader title='SENSORS'/>
           <ScrollView style={styles.container}>
             <SensorCardContent latestData={ambientSensors}/>
+            <SensorCardContent latestData={wTestBed}/>
+            <SensorCardContent latestData={wBioFilter}/>
+            <SensorCardContent latestData={wSensingTank}/>
+            <SensorCardContent latestData={fishData}/>
+            <SensorCardContent latestData={plantData}/>
           </ScrollView>
           
           
         </View>
 
-      }
-      {
-        showNextPage && <SpecificSensorPage />
-      }
+     
     </View>
   )
 }

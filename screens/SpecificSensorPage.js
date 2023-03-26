@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
-
-import React from 'react'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import {React, useState} from 'react'
 import SensorChart from '../components/SensorChart';
+import MainPageHeader from './constants/MainPageHeader';
+import SensorsMainPage from './SensorsMainPage';
 
-import AmbientParamsSensorsDataFetch from '../data/AmbientParamsSensorsDataFetch';
+import { SIZES, FONTS, COLORS } from '../components/theme';
 
 const sensorTypes = {
   "AIR TEMPERATURE": "air_temperature",
@@ -24,13 +26,32 @@ const SpecificSensorPage = (props) => {
   const type = props.params['type'];
   const unit = props.params['unit'];
 
+  const [showLastPage, setLastPage] = useState(false);
+
+  const handleGoBack = () => {
+    setLastPage(true);
+  };
+
 
 
   return (
-    <View>
-      <Text>{name}{type} {unit}</Text>
-      <SensorChart data = {sensorType(name)}/>
-    </View>
+    <>
+      {!showLastPage && (
+        <View>
+          <View style={{flexDirection : 'row', width: SIZES.width, height: (SIZES.height*0.10)}}>
+            <TouchableOpacity style={{position: 'absolute', zIndex: 1, top: 0, left: 0, padding: 10}} onPress={handleGoBack}>
+              <MaterialCommunityIcons name='arrow-left' size={34} color="#fff" />
+            </TouchableOpacity>
+            <MainPageHeader title = {name}/>
+          </View>
+          <SensorChart data = {sensorType(name)}/>
+        </View>
+      )}
+
+      {showLastPage && <SensorsMainPage />}
+    </>
+    
+    
   )
 }
 
