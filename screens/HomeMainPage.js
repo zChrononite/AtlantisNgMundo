@@ -30,7 +30,7 @@ const HomeMainPage = () => {
 const styles = StyleSheet.create({
     container: {
       backgroundColor: '#fff',
-      height: (SIZES.height * 0.78),
+      height: (SIZES.height * 0.82),
       width: SIZES.width,
       alignItems: 'center',
       justifyContent: 'center'
