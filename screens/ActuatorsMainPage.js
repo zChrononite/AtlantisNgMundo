@@ -17,7 +17,6 @@ const ActuatorsMainPage = ({}) => {
   const actDevices = CurrentActuatorStatusData();
 
 
-
   //get card width to much its height
   const [cardWidth, setCardWidth] = useState(0);
 
@@ -60,7 +59,6 @@ const ActuatorsMainPage = ({}) => {
         <View>
           <MainPageHeader title='ACTUATORS'/>
           <ScrollView style={styles.container} >
-            
             <View style={{flexDirection: 'row', margin: 8}} >
               {/* This is to reflect the number of actuators in an array */}
               {Array.from({length:numColumns}).map((_,columnIndex)=> (

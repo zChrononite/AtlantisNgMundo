@@ -120,7 +120,7 @@ const CurrentActuatorStatusData = () => {
     }
   }, [data, loading]);
 
-  return actDevices;
+  return (actDevices);
 };
 
 
