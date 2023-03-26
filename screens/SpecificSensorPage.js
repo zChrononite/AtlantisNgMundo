@@ -1,9 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
-
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import SensorChart from '../components/SensorChart';
-
-import AmbientParamsSensorsDataFetch from '../data/AmbientParamsSensorsDataFetch';
+import moment from 'moment';
 
 const sensorTypes = {
   "AIR TEMPERATURE": "air_temperature",
@@ -16,20 +14,29 @@ const sensorType = (name) => {
   return sensorTypes[name] || null;
 };
 
-
-
 const SpecificSensorPage = (props) => {
 
   const name = props.params['name'];
   const type = props.params['type'];
   const unit = props.params['unit'];
 
+  const [readings, setReadings] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    fetch('https://atlantis-api-gk7h.onrender.com/api/v1.0/AmbientParams')
+      .then(response => response.json())
+      .then(data => {
+        setReadings(data);
+        setLoading(false);
+      })
+      .catch(error => console.error(error))
+  }, [])
 
   return (
     <View>
       <Text>{name}{type} {unit}</Text>
-      <SensorChart data = {sensorType(name)}/>
+      <SensorChart data={sensorType(name)} readings={readings} loading={loading} />
     </View>
   )
 }

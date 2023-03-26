@@ -1,67 +1,57 @@
-import { View, Text, ScrollView } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { LineChart, BarChart } from 'react-native-chart-kit';
-import { Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
 import { COLORS, SIZES, FONTS } from './theme';
 import moment from 'moment';
 
-import AmbientParamsSensorsDataFetch from '../data/AmbientParamsSensorsDataFetch';
-
 const SensorChart = (props) => {
 
-    const {readings, loading} = AmbientParamsSensorsDataFetch();
-    const name = props.data;
-    console.log(readings);
+  const name = props.data;
+  const [selectedDataPoint, setSelectedDataPoint] = useState(null);
 
- 
+  const handleDataPointPress = (index) => {
+    setSelectedDataPoint(index);
+  }
 
   return (
-    
     <>
-    
-        { loading ?  <Text>Loading...</Text> :
-    <View horizontal={true} showsHorizontalScrollIndicator={false}  style={{ backgroundColor: COLORS.primary2 , borderRadius: 10, padding: 10, borderColor: COLORS.primary2, width: SIZES.width }} >
-      {readings && 
-       <LineChart
-        data={{
-        labels: readings.map(item => moment(item.timestamp).format('MMM DD, h:mm A')),
-        datasets: [
-            {
-                data: readings.map(item => item[name])
-            }
-        ]
-        }}
-        width={10} // from react-native
-        height={350}
-        yAxisLabel=""
-        yAxisSuffix="%"
-        yAxisInterval={1} // optional, defaults to 1
-        chartConfig={{
-        backgroundColor: COLORS.primary,
-        backgroundGradientFrom: COLORS.primary,
-        backgroundGradientTo: COLORS.primary3,
-        decimalPlaces: 0, // optional, defaults to 2dp
-        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-        style: {
-            borderRadius: 5,
-            paddingTop: 20,
-        },
-        propsForDots: {
-            r: "4",
-            strokeWidth: "2",
-            stroke: COLORS.primary3
-        }
-        }}
-        bezier
-        style={{
-        borderRadius: 10
-        }}
-    />}
-     </View>
+      {props.loading ? <Text>Loading...</Text> :
+        <View style={{ backgroundColor: COLORS.primary2, 
+          borderRadius: 10, 
+          padding: 10, 
+          borderColor: COLORS.primary2, 
+          width: SIZES.width,
+          height: 300  }}>
+          {props.readings &&
+            <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+              {props.readings.slice(0, 5).map((item, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => handleDataPointPress(index)}
+                  activeOpacity={0.7}
+                  style={{ flex: 1, alignItems: 'center' }}>
+                  <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: selectedDataPoint === index ? COLORS.primary : COLORS.primary3, marginBottom: item[name] * 2, borderWidth: 1, borderColor: selectedDataPoint === index ? COLORS.white : COLORS.primary }}>
+                  </View>
+                  <Text style={{ color: COLORS.white, fontSize: 16, marginTop: 10 }}>{moment(item.timestamp).format('MMM DD, h:mm A')}</Text>
+                  {index > 0 && (
+                    <View
+                      style={{
+                        position: 'absolute',
+                        top: props.readings[index - 1][name] * 2 + 10,
+                        bottom: item[name] * 2 + 10,
+                        left: ((SIZES.width - 20) / 5) * (index - 1) + 9,
+                        right: ((SIZES.width - 20) / 5) * index + 1,
+                        backgroundColor: selectedDataPoint === index ? COLORS.primary : COLORS.primary3,
+                      }}
+                    />
+                  )}
+                </TouchableOpacity>
+              ))}
+            </View>
+          }
+        </View>
       }
     </>
   )
 }
 
-export default SensorChart
+export default SensorChart;
