@@ -12,48 +12,55 @@ const SensorChart = (props) => {
     setSelectedDataPoint(index);
     Alert.alert('Data point clicked', `Index: ${index}, Timestamp: ${moment(props.readings[index].timestamp).format('MMM DD, h:mm A')}`);
   }
-  
+
+  const chartHeight = 200;
+  const chartWidth = SIZES.width - 20;
+  const numberOfDataPoints = 5;
+  const dataPointWidth = chartWidth / numberOfDataPoints;
+
+  const lineStyle = {
+    position: 'absolute',
+    backgroundColor: COLORS.primary,
+    height: 1,
+  };
 
   return (
     <>
       {props.loading ? <Text>Loading...</Text> :
         <View style={{ backgroundColor: COLORS.primary2, 
           borderRadius: 10, 
+          borderWidth: 3,
           padding: 10, 
-          borderColor: COLORS.primary2, 
+          borderColor: COLORS.primary, 
           width: SIZES.width,
-          height: 300  }}>
+          height: chartHeight + 20,
+          flexDirection: 'row' }}>
+          <View style={{ justifyContent: 'space-between', height: chartHeight, marginRight: 10 }}>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>100</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>75</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>50</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>25</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: 0 }}>0</Text>
+          </View>
           {props.readings &&
-            <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between' }}>
-              {props.readings.slice(0, 5).map((item, index) => (
+            <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', height: chartHeight }}>
+              {props.readings.slice(0, numberOfDataPoints).map((item, index) => (
                 <TouchableOpacity
                   key={index}
                   onPress={() => handleDataPointPress(index)}
                   activeOpacity={0.7}
-                  style={{ flex: 1, alignItems: 'center' }}>
-                  <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: selectedDataPoint === index ? COLORS.primary : COLORS.primary3, marginBottom: item[name] * 2, borderWidth: 1, borderColor: selectedDataPoint === index ? COLORS.white : COLORS.primary }}>
+                  style={{ alignItems: 'center', width: dataPointWidth }}>
+                  <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: selectedDataPoint === index ? COLORS.primary : COLORS.primary3, marginBottom: item[name] * (chartHeight / 100), borderWidth: 1, borderColor: selectedDataPoint === index ? COLORS.white : COLORS.primary }}>
                   </View>
-                  <Text style={{ color: COLORS.white, fontSize: 16, marginTop: 10 }}>{moment(item.timestamp).format('MMM DD, h:mm A')}</Text>
-                  {index > 0 && (
-                    <View
-                      style={{
-                        position: 'absolute',
-                        top: props.readings[index - 1][name] * 2 + 10,
-                        bottom: item[name] * 2 + 10,
-                        left: ((SIZES.width - 20) / 5) * (index - 1) + 9,
-                        right: ((SIZES.width - 20) / 5) * index + 1,
-                        backgroundColor: selectedDataPoint === index ? COLORS.primary : COLORS.primary3,
-                      }}
-                    />
-                  )}
+                  <Text style={{ color: COLORS.primary, ...FONTS.h5, margin: 10, alignItems: 'center', justifyContent:'center' , textAlign: 'center'}}>{moment(item.timestamp).format('MMM DD, h:mm A')}</Text>
                 </TouchableOpacity>
               ))}
-            </View>
-          }
-        </View>
-      }
-    </>
-  )
-}
-
-export default SensorChart;
+                  </View>
+                  }
+                  </View>
+                  }
+                  </>
+                  )
+                  }
+                  
+                  export default SensorChart;
