@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { COLORS, SIZES, FONTS } from './theme';
 import moment from 'moment';
@@ -10,7 +10,9 @@ const SensorChart = (props) => {
 
   const handleDataPointPress = (index) => {
     setSelectedDataPoint(index);
+    Alert.alert('Data point clicked', `Index: ${index}, Timestamp: ${moment(props.readings[index].timestamp).format('MMM DD, h:mm A')}`);
   }
+  
 
   return (
     <>
