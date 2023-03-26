@@ -1,5 +1,5 @@
 import { COLORS, FONTS, SIZES } from '../components/theme';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Entypo, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
 
@@ -7,11 +7,17 @@ import { Entypo, AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
 import HomeMainPage from '../screens/HomeMainPage';
 import ActuatorsMainPage from '../screens/ActuatorsMainPage';
 import SensorsMainPage from '../screens/SensorsMainPage';
+import SpecificActuatorPage from '../screens/SpecificActuatorPage';
 
 
-const BottomNavigation = () => {
+const BottomNavigation = (props) => {
 
     const [activeScreen, setActiveScreen] = useState('HomeMainPage');
+    const current = props.data;
+
+    const [showView, setShowView] = useState(true);
+   
+  
 
     const renderScreen = () => {
       switch (activeScreen) {
@@ -26,9 +32,10 @@ const BottomNavigation = () => {
       }
     }
   
-  return (
-    <View style={{ flex: 1 }}>
+  return ( 
+    <View style={{ flex: 1}}>
       {renderScreen()}
+      {console.log(activeScreen)}
       <View style={styles.bottomNavigator}>
         {/* Home */}
         <TouchableOpacity onPress={() => setActiveScreen('HomeMainPage')} style={{alignItems: 'center', justifyContent: 'center', }}>
@@ -59,6 +66,7 @@ const BottomNavigation = () => {
         </TouchableOpacity>
       </View>
     </View>
+    
   )
 }
 

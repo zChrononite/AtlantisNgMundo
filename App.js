@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import BottomNavigation from './navigation/BottomNavigation';
 import { useFonts } from 'expo-font';
-import HomeMainPage from './screens/HomeMainPage';
+import SpecificActuatorPage from './screens/SpecificActuatorPage';
 
 
 export default function App() {

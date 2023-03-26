@@ -69,7 +69,10 @@ const ActuatorsMainPage = ({}) => {
                     <TouchableOpacity 
                       key={item.id} 
                       style={[styles.card, { height: cardWidth}]} 
-                      onPress={() => {setShowNextPage(true); setData({name: item.name, icon: item.icon});}}
+                      onPress={() => {
+                        setShowNextPage(true); 
+                        setData({name: item.name, icon: item.icon, status: item.status}); 
+                        }}
                       onLayout={(event) => {
                         const { width } = event.nativeEvent.layout;
                         setCardWidth(width);
@@ -97,13 +100,16 @@ const ActuatorsMainPage = ({}) => {
                   ))}
                 </Animated.View>
               ))}
+              
             </View>
           </ScrollView>
         </View>
       }
 
       {showNextPage && 
-        <SpecificActuatorPage  data = {data}/>
+        <>
+          <SpecificActuatorPage  data = {data}/>
+        </>
       }
 
     </View>
