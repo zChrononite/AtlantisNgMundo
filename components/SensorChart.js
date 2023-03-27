@@ -12,7 +12,7 @@ const SensorChart = (props) => {
   const unit = props.unit;
   const readings = props.data;
 
-  const firstTenItems = readings.slice(0, 10); // Get the first 10 items
+  const firstTenItems = readings.slice(0, 7); // Get the first 5 items
   const data = firstTenItems.reverse();
 
   const valuesArray = data.map(item => item[name]); // create an array of the values
@@ -30,7 +30,7 @@ const SensorChart = (props) => {
     Alert.alert('Data point clicked', `Index: ${data[index][name]} ${unit}, Timestamp: ${moment(data[index].timestamp).format('MMM DD, h:mm A')}`);
   }
 
-  const chartHeight = 200;
+  const chartHeight = 100;
   const chartWidth = SIZES.width - 20;
   const numberOfDataPoints = 8;
   const dataPointWidth = chartWidth / numberOfDataPoints;
@@ -47,29 +47,36 @@ const SensorChart = (props) => {
         <View style={{ backgroundColor: COLORS.primary2, 
           borderRadius: 10, 
           borderWidth: 3,
-          padding: 10, 
+          padding: 10,
+          marginRight: 5,
+          marginLeft: 5, 
           borderColor: COLORS.primary, 
-          width: SIZES.width,
-          height: chartHeight + 20,
+          height: chartHeight + 80,
           flexDirection: 'row' }}>
-          <View style={{ justifyContent: 'space-between', height: chartHeight, marginRight: 10 }}>
-            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>{(topValue).toFixed(2)}</Text>
-            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>{(topValue*.75).toFixed(2)}</Text>
-            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>{(topValue*.50).toFixed(2)}</Text>
-            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>{(topValue*.25).toFixed(2)}</Text>
+          <View style={{ justifyContent: 'space-between', height: chartHeight,}}>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 5 }}>{(topValue).toFixed(2)}</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 5 }}>{(topValue*.75).toFixed(2)}</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 5 }}>{(topValue*.50).toFixed(2)}</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 5 }}>{(topValue*.25).toFixed(2)}</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: 0 }}>0</Text>
           </View>
           {data &&
             <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', height: chartHeight }}>
               {data.slice(0, numberOfDataPoints).map((item, index) => (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() => handleDataPointPress(index)}
-                  activeOpacity={0.7}
-                  style={{ alignItems: 'center', width: dataPointWidth }}>
-                  <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: selectedDataPoint === index ? COLORS.primary : COLORS.primary3, marginBottom: item[name] * (chartHeight / 100), borderWidth: 1, borderColor: selectedDataPoint === index ? COLORS.white : COLORS.primary }}>
-                  </View>
-                  <Text style={{ color: COLORS.primary, ...FONTS.h5, margin: 10, alignItems: 'center', justifyContent:'center' , textAlign: 'center'}}>{moment(item.timestamp).format('MMM DD, h:mm A')}</Text>
-                </TouchableOpacity>
+                <View  style={{ alignItems: 'center', width: dataPointWidth }} >
+                    <TouchableOpacity
+                    key={index}
+                    onPress={() => handleDataPointPress(index)}
+                    activeOpacity={0.7}>
+                    <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: selectedDataPoint === index ? COLORS.primary : COLORS.primary3, marginBottom: item[name] * (chartHeight / 100), borderWidth: 1, borderColor: selectedDataPoint === index ? COLORS.white : COLORS.primary }}>
+                    </View>
+              
+                    
+                    </TouchableOpacity>
+                  <Text style={{ color: COLORS.primary, ...FONTS.h5, alignItems: 'center', bottom: -60, justifyContent:'center' , textAlign: 'center'}}>{moment(item.timestamp).format('MMM DD, h:mm A')}</Text>
+
+                </View>
+                
               ))}
             </View>
           }
