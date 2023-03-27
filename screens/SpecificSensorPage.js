@@ -11,7 +11,7 @@ import { SIZES, FONTS, COLORS } from '../components/theme';
 const sensorTypes = {
   "AIR TEMPERATURE": "air_temperature",
   "RELATIVE HUMIDITY": "relative_humidity",
-  "C02 LEVEL": "co2_level",
+  "CO2 LEVEL": "co2_level",
   "INTENSITY ILLUMINATION": "intensity_illumination",
   "WATER TEMPERATURE": "water_temperature",
   "PH LEVEL": "ph_level",
