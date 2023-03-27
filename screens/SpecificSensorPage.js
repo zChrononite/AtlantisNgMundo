@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import {React, useState} from 'react'
+import {React, useState, useEffect} from 'react'
 import SensorChart from '../components/SensorChart';
 import MainPageHeader from './constants/MainPageHeader';
 import SensorsMainPage from './SensorsMainPage';
+import SensorsDataFetch from '../data/SensorsDataFetch';
 
 import { SIZES, FONTS, COLORS } from '../components/theme';
 
@@ -30,16 +31,7 @@ const SpecificSensorPage = (props) => {
     setLastPage(true);
   };
 
-
-  useEffect(() => {
-    fetch('https://atlantis-api-gk7h.onrender.com/api/v1.0/AmbientParams')
-      .then(response => response.json())
-      .then(data => {
-        setReadings(data);
-        setLoading(false);
-      })
-      .catch(error => console.error(error))
-  }, [])
+  const {readings, loading} = SensorsDataFetch(type);
 
   return (
     <>
@@ -51,7 +43,7 @@ const SpecificSensorPage = (props) => {
             </TouchableOpacity>
             <MainPageHeader title = {name}/>
           </View>
-          <SensorChart data = {sensorType(name)}/>
+          <SensorChart data = {readings} name = {name} unit = {unit}/>
         </View>
       )}
 
