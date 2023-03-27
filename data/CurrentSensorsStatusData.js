@@ -232,7 +232,7 @@ const CurrentSensorsStatusData = (props) => {
         setSensors([
           {
             id: '21',
-            name: 'Plant Health',
+            name: 'PLANT HEALTH',
             icon: 'sprout',
             reading: sensor.plant_health === 1 ? 'GOOD':'BAD',
             edge_device: sensor.edgedevice,
