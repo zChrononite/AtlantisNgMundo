@@ -18,7 +18,7 @@ const SensorChart = (props) => {
   const valuesArray = data.map(item => item[name]); // create an array of the values
   const maxValue = Math.max(...valuesArray); // use Math.max() to get the maximum value
 
-  const topValue = maxValue+ (maxValue*0.25);
+  const topValue = maxValue+ (maxValue*0.10);
 
   
 
@@ -42,7 +42,7 @@ const SensorChart = (props) => {
   };
 
   return (
-    <View style={{height: (SIZES.height * 0.82)}}>
+    <View style={{height: (SIZES.height * 0.80)}}>
       {!data ? <Text>Loading...</Text> :
         <View style={{ backgroundColor: COLORS.primary2, 
           borderRadius: 10, 
@@ -57,7 +57,6 @@ const SensorChart = (props) => {
             <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>{(topValue*.75).toFixed(2)}</Text>
             <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>{(topValue*.50).toFixed(2)}</Text>
             <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>{(topValue*.25).toFixed(2)}</Text>
-            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: 0 }}>0</Text>
           </View>
           {data &&
             <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', height: chartHeight }}>
