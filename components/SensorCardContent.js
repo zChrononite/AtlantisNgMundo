@@ -5,6 +5,8 @@ import { Dimensions } from 'react-native'
 import { Current, Icon, StatusIndicator, TimeStamp, Title } from './SensorCardComponents'
 import SpecificSensorPage from '../screens/SpecificSensorPage'
 
+import { SIZES, FONTS, COLORS } from './theme'
+
 const SensorCardContent = ({ latestData }) => {
  
   const [showNextPage, setShowNextPage] = useState(false);
@@ -64,7 +66,7 @@ const styles = StyleSheet.create({
     elevation: 15,
     shadowColor: '#000',
     width: Dimensions.get("window").width - 30,
-    height: 150,
+    height: SIZES.height*0.18,
     shadowOffset: {
       width: 3,
       height: 3,
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 5,
     marginHorizontal: 20,
-    marginVertical: 17,
+    marginVertical: '2.5%',
     paddingVertical: 20,
     paddingHorizontal: 10,
   },
