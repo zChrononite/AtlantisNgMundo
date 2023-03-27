@@ -27,7 +27,7 @@ const SensorChart = (props) => {
 
   const handleDataPointPress = (index) => {
     setSelectedDataPoint(index);
-    Alert.alert('Data point clicked', `Index: ${data[index][name]} ${unit}, Timestamp: ${moment(data[index].timestamp).format('MMM DD, h:mm A')}`);
+    Alert.alert('Status', `Reading: ${data[index][name]} ${unit} \nTimestamp: ${moment(data[index].timestamp).format('MMM DD, h:mm A')}`);
   }
 
   const chartHeight = 100;
@@ -42,7 +42,7 @@ const SensorChart = (props) => {
   };
 
   return (
-    <View style={{height: (SIZES.height * 0.80)}}>
+    <View >
       {!data ? <Text>Loading...</Text> :
         <View style={{ backgroundColor: COLORS.primary2, 
           borderRadius: 10, 
@@ -54,11 +54,11 @@ const SensorChart = (props) => {
           height: chartHeight + 80,
           flexDirection: 'row' }}>
           <View style={{ justifyContent: 'space-between', height: chartHeight,}}>
-            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 5 }}>{(topValue).toFixed(2)}</Text>
-            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 5 }}>{(topValue*.75).toFixed(2)}</Text>
-            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 5 }}>{(topValue*.50).toFixed(2)}</Text>
-            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 5 }}>{(topValue*.25).toFixed(2)}</Text>
-            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: 0 }}>0</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 5 }}>{(topValue).toFixed(2)}{unit}</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 5 }}>{(topValue*.80).toFixed(2)}{unit}</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 5 }}>{(topValue*.60).toFixed(2)}{unit}</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 5 }}>{(topValue*.40).toFixed(2)}{unit}</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: 0 }}>{(topValue*.20).toFixed(2)}{unit}</Text>
           </View>
           {data &&
             <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', height: chartHeight }}>
@@ -73,7 +73,7 @@ const SensorChart = (props) => {
               
                     
                     </TouchableOpacity>
-                  <Text style={{ color: COLORS.primary, ...FONTS.h5, alignItems: 'center', bottom: -60, justifyContent:'center' , textAlign: 'center'}}>{moment(item.timestamp).format('MMM DD, h:mm A')}</Text>
+                  <Text style={{ color: COLORS.primary, ...FONTS.h6, alignItems: 'center', bottom: -60, justifyContent:'center' , textAlign: 'center'}}>{moment(item.timestamp).format('MMM DD, h:mm A')}</Text>
 
                 </View>
                 

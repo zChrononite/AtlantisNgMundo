@@ -27,8 +27,8 @@ const SensorCardContent = ({ latestData, onSelection }) => {
                       style={styles.card}
                       onPress={() => {
                         setShowNextPage(true); 
-                        setData({name: item.name, type: item.type, unit: item.unit});
-                        onSelection({name: item.name, type: item.type, unit: item.unit}); // Call the onSelection prop with the selected data
+                        setData({name: item.name, type: item.type, unit: item.unit, stat: item.reading});
+                        onSelection({name: item.name, type: item.type, unit: item.unit, stat: item.reading}); // Call the onSelection prop with the selected data
                       }}> 
                       <View style={{ flex: 1 , flexDirection: 'row',  alignItems: 'center', paddingHorizontal: 10, justifyContent: 'space-between' }}>
                         <View style={{ width: '40%', gap: 5, justifyContent: 'space-between'}}>
