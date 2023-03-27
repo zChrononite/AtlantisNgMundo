@@ -3,19 +3,36 @@ import React, { useState } from 'react'
 import { COLORS, SIZES, FONTS } from './theme';
 import moment from 'moment';
 
-const SensorChart = (props) => {
 
-  const name = props.data;
+
+  
+
+const SensorChart = (props) => {
+  const name = props.name;
+  const unit = props.unit;
+  const readings = props.data;
+
+  const firstTenItems = readings.slice(0, 10); // Get the first 10 items
+  const data = firstTenItems.reverse();
+
+  const valuesArray = data.map(item => item[name]); // create an array of the values
+  const maxValue = Math.max(...valuesArray); // use Math.max() to get the maximum value
+
+  const topValue = maxValue+ (maxValue*0.25);
+
+  
+
+
   const [selectedDataPoint, setSelectedDataPoint] = useState(null);
 
   const handleDataPointPress = (index) => {
     setSelectedDataPoint(index);
-    Alert.alert('Data point clicked', `Index: ${index}, Timestamp: ${moment(props.readings[index].timestamp).format('MMM DD, h:mm A')}`);
+    Alert.alert('Data point clicked', `Index: ${data[index][name]} ${unit}, Timestamp: ${moment(data[index].timestamp).format('MMM DD, h:mm A')}`);
   }
 
   const chartHeight = 200;
   const chartWidth = SIZES.width - 20;
-  const numberOfDataPoints = 5;
+  const numberOfDataPoints = 8;
   const dataPointWidth = chartWidth / numberOfDataPoints;
 
   const lineStyle = {
@@ -25,8 +42,8 @@ const SensorChart = (props) => {
   };
 
   return (
-    <>
-      {props.loading ? <Text>Loading...</Text> :
+    <View style={{height: (SIZES.height * 0.82)}}>
+      {!data ? <Text>Loading...</Text> :
         <View style={{ backgroundColor: COLORS.primary2, 
           borderRadius: 10, 
           borderWidth: 3,
@@ -36,15 +53,15 @@ const SensorChart = (props) => {
           height: chartHeight + 20,
           flexDirection: 'row' }}>
           <View style={{ justifyContent: 'space-between', height: chartHeight, marginRight: 10 }}>
-            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>100</Text>
-            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>75</Text>
-            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>50</Text>
-            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>25</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>{(topValue).toFixed(2)}</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>{(topValue*.75).toFixed(2)}</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>{(topValue*.50).toFixed(2)}</Text>
+            <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: chartHeight / 4 }}>{(topValue*.25).toFixed(2)}</Text>
             <Text style={{ color: COLORS.primary, ...FONTS.h5, marginBottom: 0 }}>0</Text>
           </View>
-          {props.readings &&
+          {data &&
             <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', height: chartHeight }}>
-              {props.readings.slice(0, numberOfDataPoints).map((item, index) => (
+              {data.slice(0, numberOfDataPoints).map((item, index) => (
                 <TouchableOpacity
                   key={index}
                   onPress={() => handleDataPointPress(index)}
@@ -55,12 +72,12 @@ const SensorChart = (props) => {
                   <Text style={{ color: COLORS.primary, ...FONTS.h5, margin: 10, alignItems: 'center', justifyContent:'center' , textAlign: 'center'}}>{moment(item.timestamp).format('MMM DD, h:mm A')}</Text>
                 </TouchableOpacity>
               ))}
-                  </View>
-                  }
-                  </View>
-                  }
-                  </>
-                  )
-                  }
+            </View>
+          }
+          </View>
+      }
+    </View>
+  )
+}
                   
-                  export default SensorChart;
+export default SensorChart;

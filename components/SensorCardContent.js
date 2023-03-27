@@ -6,11 +6,15 @@ import { Current, Icon, StatusIndicator, TimeStamp, Title } from './SensorCardCo
 import SpecificSensorPage from '../screens/SpecificSensorPage'
 
 import { SIZES, FONTS, COLORS } from './theme'
+import SensorsMainPage from '../screens/SensorsMainPage'
 
-const SensorCardContent = ({ latestData }) => {
+
+const SensorCardContent = ({ latestData, onSelection }) => {
  
   const [showNextPage, setShowNextPage] = useState(false);
   const [data, setData] = useState([]);
+
+
   
   return (
     <View>
@@ -23,7 +27,8 @@ const SensorCardContent = ({ latestData }) => {
                       style={styles.card}
                       onPress={() => {
                         setShowNextPage(true); 
-                        setData({name: item.name, type: item.type, unit: item.unit})
+                        setData({name: item.name, type: item.type, unit: item.unit});
+                        onSelection({name: item.name, type: item.type, unit: item.unit}); // Call the onSelection prop with the selected data
                       }}> 
                       <View style={{ flex: 1 , flexDirection: 'row',  alignItems: 'center', paddingHorizontal: 10, justifyContent: 'space-between' }}>
                         <View style={{ width: '40%', gap: 5, justifyContent: 'space-between'}}>
@@ -49,11 +54,9 @@ const SensorCardContent = ({ latestData }) => {
                 
               </>
         }
-      {
-        showNextPage && <SpecificSensorPage params = {data}/>
-      }
+      
     </View>
-        
+       
   )
 }
 

@@ -18,7 +18,6 @@ const SensorAPIPicker = (type) => {
 function SensorsDataFetch(props) {
   const [readings, setReadings] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(props)
 
   useEffect(() => {
     fetch(SensorAPIPicker(props))

@@ -13,6 +13,20 @@ const sensorTypes = {
   "RELATIVE HUMIDITY": "relative_humidity",
   "C02 LEVEL": "co2_level",
   "INTENSITY ILLUMINATION": "intensity_illumination",
+  "WATER TEMPERATURE": "water_temperature",
+  "PH LEVEL": "ph_level",
+  "DISSOLVED O2 LEVEL": "dissolved_o2_level",
+  "ELECTRICAL CONDUCTIVITY": "elec_conductivity",
+  "TOTAL DISSOLVED SOLIDS": "total_dissolved_solids",
+  "NITRITE ": "nitrite",
+  "NITRATE": "nitrate",
+  "AMMONIA": "ammonia",
+  "PLANT HEALTH": "fish_width",
+  "FISH WIDTH": "fish_length",
+  "FISH LENGTH": "fish_length",
+  "FISH WEIGHT": "fish_weight",
+  
+
 };
 
 const sensorType = (name) => {
@@ -43,7 +57,7 @@ const SpecificSensorPage = (props) => {
             </TouchableOpacity>
             <MainPageHeader title = {name}/>
           </View>
-          <SensorChart data = {readings} name = {name} unit = {unit}/>
+          <SensorChart data = {readings} name = {sensorType(name)} unit = {unit}/>
         </View>
       )}
 
