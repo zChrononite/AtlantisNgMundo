@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
 import ActuatorsMainPage from './ActuatorsMainPage';
 import MainPageHeader from './constants/MainPageHeader';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -7,7 +7,7 @@ import { SIZES, FONTS, COLORS } from '../components/theme';
 import ActuatorToggle from '../components/ActuatorToggle';
 import ActuatorDataFetch from '../data/ActuatorDataFetch';
 import LottieView from 'lottie-react-native';
-
+import loadingImage from '../assets/loading/giphy2.gif'
 
 
 {/* this is for determining the type of actuator the user has selected from the actuator screen*/}
@@ -64,7 +64,7 @@ const SpecificActuatorPage = (props) => {
           </View>
           {loading && (
             <View style={{ justifyContent: 'center', alignItems: 'center',  width: SIZES.width, height: '86%'}}>
-              <Text>LOADING...</Text>
+              <Image source={loadingImage} style={{height: 200, width: 200,}} />
             </View>)
           }
           {!loading &&

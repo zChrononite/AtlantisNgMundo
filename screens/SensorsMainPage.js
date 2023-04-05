@@ -132,7 +132,7 @@ const SensorsMainPage = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
-    height: (SIZES.height * 0.70),
+    height: (SIZES.height * 0.78),
     marginTop: '15%'
   },
 

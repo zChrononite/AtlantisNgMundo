@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { FONTS } from './theme';
+import { FONTS, SIZES } from './theme';
 
 const DropdownPicker = ({ options, onSelect }) => {
   const [selectedOption, setSelectedOption] = useState(options[0]);
@@ -33,7 +33,7 @@ const DropdownPicker = ({ options, onSelect }) => {
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
-    width: 200,
+    width: SIZES.width*0.35,
     zIndex: 1,
 
   },

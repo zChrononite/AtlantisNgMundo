@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Animated, ScrollView  } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Animated, ScrollView, Image } from 'react-native'
 import { useState, useEffect, useRef, React, useMemo } from 'react'
 import { SIZES, COLORS, FONTS } from '../components/theme'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
@@ -7,7 +7,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import SpecificActuatorPage from './SpecificActuatorPage';
 import CurrentActuatorStatusData from '../data/CurrentActuatorStatusData';
 import MainPageHeader from './constants/MainPageHeader';
-import BottomNavigation from '../navigation/BottomNavigation';
+import ActuatorDataFetch from '../data/ActuatorDataFetch';
+
+import loadingImage from '../assets/loading/giphy2.gif'
+import { ActivityIndicator } from 'react-native';
 
 const ActuatorsMainPage = ({}) => {
 
@@ -19,6 +22,7 @@ const ActuatorsMainPage = ({}) => {
 
   //get card width to much its height
   const [cardWidth, setCardWidth] = useState(0);
+
 
 
   {/* Number of columns in actautors */}
@@ -49,6 +53,8 @@ const ActuatorsMainPage = ({}) => {
 useEffect(() => {
   Animated.loop(animation).start();
 }, [animation]);
+
+
 
 
   return (
@@ -121,6 +127,13 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     height: (SIZES.height * 0.82)
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.white,
+
   },
 
   card: {
